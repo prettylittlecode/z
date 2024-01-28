@@ -10,20 +10,21 @@ class Database {
         this.connect()
     }
 
-const mongoose = require('mongoose');
+    connect() {
+        const uri = process.env.MONGODB_URI; // assuming MONGODB_URI is an environment variable containing the connection string
 
-const uri = process.env.MONGODB_URI; // assuming MONGODB_URI is an environment variable containing the connection string
-
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-})
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch((error) => {
-  console.error('Error connecting to MongoDB:', error);
-});
+        mongoose.connect(uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false,
+        })
+        .then(() => {
+            console.log('Connected to MongoDB');
+        })
+        .catch((error) => {
+            console.error('Error connecting to MongoDB:', error);
+        });
+    }
+}
 
 module.exports = new Database();
